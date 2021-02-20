@@ -7,7 +7,7 @@
 .. _introduction:
 
 ===============================
-Akıllı Sözleşmelere Giriş
+Akıllı Sözleşmelere Giriş 
 ===============================
 
 Akıllı Sözleşme, Concordium blok zincirine gönderilen ve doğrudan çekirdek
