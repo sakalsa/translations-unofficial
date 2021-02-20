@@ -1,18 +1,18 @@
 .. _contract-module:
 
 ======================
-Smart contract modules
+Akıllı Sözleşme Modülleri
 ======================
 
-Smart contracts are deployed on the chain in *smart contract modules*.
+Akıllı sözleşmeler, *akıllı sözleşme modüllerindeki* zincirde oluşturulur.
 
 .. note::
 
-   A smart contract module is often referred to simply as a *module*.
+   Akıllı Sözleşme Modülüne genellile basit olarak *modül* olarak adlandırılır.
 
-A module can contain one or more smart contracts, allowing code to be shared
-among the contracts and can optionally contain :ref:`contract schemas
-<contract-schema>`.
+Bir modül, kodun sözleşmeler arasında paylaşılmasına izin veren bir veya
+daha fazla akıllı sözleşme içerebilir ve isteğe bağlı olarak
+:ref:`kontrat şablonu <contract-schema>` içerebilir..
 
 .. graphviz::
    :align: center
@@ -27,17 +27,17 @@ among the contracts and can optionally contain :ref:`contract schemas
        }
    }
 
-The module must be self-contained, and only have a restricted list of imports
-that allow for interaction with the chain.
-These are provided by the host environment and are available for the smart
-contract by importing a module named ``concordium``.
+Modül bağımsız olmalıdır ve yalnızca zincirle etkileşime izin veren kısıtlı
+bir içeri alma listesine sahip olmalıdır. Bunlar Node Sunucular tarafından
+sağlanır ve ``concordium`` adı verilen bir modülü içe aktararak akıllı
+sözleşme için kullanılabilir.
 
 .. seealso::
 
    Check out :ref:`host-functions` for a complete reference.
 
-On-chain language
-=================
+Blok Zincir Yazılım Dili
+========================
 
 On the Concordium blockchain the smart contract language is a subset of `Web
 Assembly`_ (Wasm in short) which is designed to be a portable compilation
