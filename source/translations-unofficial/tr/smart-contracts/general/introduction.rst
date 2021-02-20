@@ -91,8 +91,8 @@ gerçek verileri gizleyen şifreleme ve taahhütler gibi türetilmiş kavramlarl
 Bir Akıllı Sözleşmenin Yaşam Döngüsü
 ====================================
 
-Akıllı bir sözleşme ilk olarak zincire bir :ref:`Sözleşme
-Modülü <contract-module>`parçası olarak dağıtılır. Bundan sonra bir
-:ref:`akıllı sözleşme örneği <contract-instances>` almak için bir Akıllı
+Akıllı bir sözleşme ilk olarak zincire bir Sözleşme
+Modülünün parçası olarak dağıtılır. Bundan sonra bir
+Akıllı Sözleşme Örneği almak için bir Akıllı
 Sözleşme çalıştırılır. Son olarak Akıllı Sözleşme Örneği kendi yazılım mantığına
 göre tekrar tekrar güncellenebilir.
