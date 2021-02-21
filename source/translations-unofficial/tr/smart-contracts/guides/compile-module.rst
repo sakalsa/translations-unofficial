@@ -102,11 +102,11 @@ burada `<user>` Wasp modülünü derleyen kullanıcı adı ile değiştirilmelid
 Uyarılar
 --------
 
-Rust araçzinciri için `rust-src`` yüklenmişse bu yukarıdakile muhtemelen
+Rust zincir araçları içinden `rust-src`` yüklenmişse bu yukarıdakiler muhtemelen
 bilgileri kaldırmayacaktır. Bunu için rust-analyzer_ tarzı araçlara ihtiyacınız
 olabilir.
 
-.. Ayrıca Bakınız::
+.. alsosee::
 
    An issue reporting the problem with ``--remap-path-prefix`` and ``rust-src``
    https://github.com/rust-lang/rust/issues/73167
