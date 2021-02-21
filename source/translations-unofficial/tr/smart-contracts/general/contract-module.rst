@@ -39,54 +39,53 @@ sözleşme için kullanılabilir.
 Blok Zincir Yazılım Dili
 ========================
 
-On the Concordium blockchain the smart contract language is a subset of `Web
-Assembly`_ (Wasm in short) which is designed to be a portable compilation
-target and to be run in sandboxed environments. This is useful because smart
-contracts will be run by bakers in the network who do not necessarily trust
-the code.
+Concordium blok zincirinin akıllı sözleşme dili, taşınabilir bir derleme hedefi
+olacak ve korumalı ortamlarda çalıştırılmak üzere tasarlanmış bir Web Assembly
+(kısaca Wasm) alt kümesidir. Bu kullanışlıdır. Çünkü akıllı sözleşmeler ağdaki
+koda güvenmeyen Baker' lar tarafından çalıştırılacaktır.
 
-Wasm is a low-level language and it is impractical to write by hand. Instead one
-can write smart contracts in a more high-level language which is then
-compiled to Wasm.
+Wasm düşük seviyeli bir dildir ve elle yazmak pratik değildir. Bunun yerine
+daha yüksek seviyeli bir dilde akıllı sözleşmeler yazılabilir ve bunlar daha
+sonra Wasm'a derlenir.
 
 .. _wasm-limitations:
 
-Limitations
+Sınırlamalar
 -----------
 
 .. todo::
 
    Add other limitations, such as start sections...
 
-The blockchain environment is very particular in the sense that each node must
-be able to execute the contract in exactly the same way, using exactly the same
-amount of resources. Otherwise nodes would fail to reach consensus on the
-state of the chain. For this reason smart contracts need to be written in a restricted
-subset of Wasm.
+Blok zinciri ortamı, her bir Node Server' ın akıllı sözleşmeyi tam olarak aynı
+miktarda kaynağı kullanarak tam olarak aynı şekilde çalıştırabilmesi açısından
+çok özeldir. Aksi takdirde Node Server' lar, zincirin durumu hakkında fikir
+birliğine varamazlar. Bu nedenle akıllı sözleşmelerin sınırlı bir Wasm alt
+kümesine yazılması gerekir.
 
-Floating point numbers
-^^^^^^^^^^^^^^^^^^^^^^
+Kayan Nokta Sayıları
+^^^^^^^^^^^^^^^^^^^^
 
-Although Wasm does have support for floating point numbers, a smart contract is
-disallowed to use them. The reason for this is that Wasm floating-point numbers
-can have a special ``NaN`` ("not a number") value whose treatment can result in nondeterminism.
+Wasm'ın kayan nokta sayılarını desteklemesine rağmen, bir akıllı sözleşmenin
+bunları kullanmasına izin verilmez. Bunun nedeni, Wasm kayan noktalı sayıların
+özel bir NaN ("sayı olmayan") değeri olabilmesidir ve bu değerin işlenmesi
+belirsizlikle sonuçlanabilir.
 
-The restriction applies statically, meaning that smart contracts cannot contain
-floating point types, nor can they contain any instructions that involve floating
-point values.
+Kısıtlama statik olarak uygulanır, yani akıllı sözleşmeler kayan nokta türleri
+içeremez veya kayan nokta değerleri içeren herhangi bir talimat içeremez.
 
+Dağıtım
+=======
 
-Deployment
-==========
+Zincire bir modül dağıtma işlemi, modül bayt kodunu Concordium ağına bir işlem
+olarak göndermeyi ifade eder. Eğer bu işlem geçerli ise bir bloğa dahil
+edilecektir. Bu işlem, diğer her işlem gibi belirli bir maliyete sahiptir.
+Maliyet, bayt kodunun boyutuna bağlıdır ve hem modülün geçerliliğini kontrol
+etmek hem de zincir üzerinde depolamak için tahsil edilir.
 
-Deploying a module to the chain means submitting the module bytecode as a
-transaction to the Concordium network. If *valid* this transaction will be
-included in a block. This transaction, as every other transaction, has an
-associated cost. The cost is based on the size of the bytecode and is charged
-for both checking validity of the module and on-chain storage.
+Dağıtımın kendisi akıllı sözleşme yürütmez. Yürütmek için, bir kullanıcının
+önce bir sözleşmenin bir örneğini oluşturması gerekir.
 
-The deployment itself does not execute
-smart contract. To execute, a user must first create an *instance* of a contract.
 
 .. seealso::
 
@@ -100,31 +99,32 @@ smart contract. To execute, a user must first create an *instance* of a contract
 
 .. _contract-on-the-chain:
 
-Smart contract on the chain
-===========================
+Blok Zincir üzerinde Akıllı Sözleşme
+====================================
 
-A smart contract on the chain is a collection of functions exported from a deployed
-module. The concrete mechanism used for this is the `Web Assembly`_ export
-section. A smart contract must export one function for initializing new
-instances and can export zero or more functions for updating the instance.
+Blok zincirdeki akıllı sözleşme, konuşlandırılmış bir modülden dışa aktarılan
+işlevlerin bir koleksiyonudur. Bunun için kullanılan somut mekanizma Web
+Assembly' nin dışa aktarma bölümüdür. Bir Akıllı Sözleşme, yeni örnekleri
+başlatmak için bir işlevi dışa aktarmalıdır ve örneği güncellemek için sıfır
+veya daha fazla işlevi dışa aktarabilir.
 
-Since a smart contract module can export functions for multiple different smart
-contracts, we associate the functions using a naming scheme:
+Bir akıllı sözleşme modülü, birden çok farklı akıllı sözleşme için işlevleri
+dışa aktarabildiğinden, işlevleri bir adlandırma şeması kullanarak
+ilişkilendiririz:
 
-- ``init_<contract-name>``: The function for initializing a smart contract must
-  start with ``init_`` followed by a name of the smart contract. The contract
-  must consist only of ASCII alphanumeric or punctuation characters, and is not
-  allowed to contain the ``.`` symbol.
+- ``init_<contract-name>``: Bir akıllı sözleşme başlatmak için ``init_`` komutu
+  ve ardından akıllı sözleşmemini adıyla başlamalıdır. Akıllı sözleşme sadece
+  ASCII alfanümerik yada noktalama işaretleniden oluşabilir. Sadece ``.`` karakterine
+  izin verilmez.
 
-- ``<contract-name>.<receive-function-name>``: Functions for interacting with a
-  smart contract are prefixed with the contract name, followed by a ``.`` and a
-  name for the function. Same as for the init function, the contract name is not allowed
-  to contain the ``.`` symbol.
+- ``<contract-name>.<receive-function-name>``: Bir akıllı sözleşmeyle etkileşime
+  girmek için ``.`` işlevinden sonra sözleşme adı ve ardından işlev adı gelir.
+  Akıllı sözleşmenin adının ``.`` karekteri içermesine izin verilmez.
 
-.. note::
+.. Not::
 
-   If you develop smart contracts using Rust and ``concordium-std``, the
-   procedural macros ``#[init(...)]`` and ``#[receive(...)]`` set up the
-   correct naming scheme.
+   Eğer Rust ve ``concordium-std`` kullanan bir akıllı sözleşme geliştiricisi
+   iseniz, prosedür makrolalrı için ``#[init(...)]`` ve ``#[receive(...)]``
+   şemalarından doğru olanı seçmelisiniz.
 
 .. _Web Assembly: https://webassembly.org/
