@@ -2,54 +2,55 @@
 
 .. _setup-contract:
 
-===================================
-Setting up a smart contract project
-===================================
+=====================================
+Bir akıllı sözleşme projesi oluşturma
+=====================================
 
-A smart contract in Rust is written as an ordinary Rust library crate.
-The library is then compiled to Wasm using the Rust target
-``wasm32-unknown-unknown`` and, since it is just a Rust library, we can use
-Cargo_ for dependency management.
+Rust' ta bir akıllı sözleşme sıradan bir kütüphane olarak yazılır. Daha sonra
+Rust hedfine Wasm kullanılarak derlenir
+``wasm32-unknown-unknown`` ve sadece Rust kütüphanesi olduğundan Cargo_
+bağımlılıklarının yönetimi için kullanılır.
 
-To set up a new smart contract project, first create a project directory. Inside
-the project directory run the following in a terminal:
+Yeni bir akıllı sözleşme oluşturmak için öncelikle bir dizin oluşturun ve dizin
+içinde terminal ekranında şu konutu çalıştırın;
 
 .. code-block:: console
 
    $cargo init --lib
 
+Bu işlem birkaç dosya ve dizin oluşturarak Rust Kütüğhanesi' nı kuracaktır.
 This will set up a default Rust library project by creating a few files and
 directories.
-Your directory should now contain a ``Cargo.toml`` file and a ``src``
-directory and some hidden files.
+Bu dizin ``Cargo.toml`` dosyası ``src`` dizini ve bazı gizli dosyalar içerir.
 
-To be able to build Wasm we need to tell cargo the right ``crate-type``.
-This is done by adding the following in the file ``Cargo.toml``::
+Wasm' ı derleyebilmek için cargo' ya doğru ``crate-type`` 'ı belirtmeliyiz.'
+Bu belirme işlemini ``Cargo.toml``: içerisinde aşağıdaki komutlar eklenerek
+yapılır.
 
    [lib]
    crate-type = ["cdylib", "rlib"]
 
-Adding the smart contract standard library
-==========================================
+Akıllı sözleşme standart kütüphanesini oluşturma
+================================================
 
-The next step is to add ``concordium-std`` as a dependency.
-It is a library for Rust containing procedural macros and functions for
-writing small and efficient smart contracts.
+Sıradaki adım ``concordium-std`` 'ı bağımlılık olarak eklemektir.
+Bu Rust Kütüphanesi küçük ve verimli akıllı söyleşmeler yazmak için çeşitli
+makrolar ve komutlar içerir.
 
-The library is added by opening ``Cargo.toml`` and adding the line
-``concordium-std = "*"`` (preferably, replace the `*` with the latest version of `concordium-std`_) in
-the ``[dependencies]`` section::
+Kütüphaneyi eklemek için ``Cargo.toml`` dosyasına aşağıdaki kod satırı eklenir.
+``concordium-std = "*"`` (`*` yerine `concordium-std`_ ın en son sürüm numarası
+gelmelidir.)
 
    [dependencies]
    concordium-std = "0.4"
 
-The crate documentation can be found on docs.rs_.
+Kütüphane ile ilhili bilgilere docs.rs_ 'den ulaşabilisiniz.
 
-.. note::
+.. Not::
 
-   If you wish to use a modified version of this crate, you will have to clone
-   the repository with ``concordium-std`` and have the dependency point at the
-   directory instead, by adding the following to ``Cargo.toml``::
+   Standart kütüphane yerine özelleştirilmiş bir tane kullanmak isterseniz,
+   ``concordium-std`` reposunu klonlayıp,``Cargo.toml``: içerisine bağımlılıklar
+   için gerekli kodları eklemelisiniz.
 
       [dependencies]
       concordium-std = { path = "./path/to/concordium-std" }
@@ -61,4 +62,4 @@ The crate documentation can be found on docs.rs_.
 .. _docs.rs: https://docs.rs/crate/concordium-std/
 .. _`concordium-std`: https://docs.rs/crate/concordium-std/
 
-That is it! You are now ready to develop your own smart contract.
+Herşey tamam. Yeni bir akıllı sözleşme geliştirmek için artık hazırsınız.
