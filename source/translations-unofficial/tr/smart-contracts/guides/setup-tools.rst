@@ -1,18 +1,17 @@
 .. _setup-tools:
 
-=============================
-Install tools for development
-=============================
+==========================================
+Geliştirme için gerekli araşların kurulumu
+==========================================
 
-Before we can start developing smart contracts, we need to setup the
-environment.
+Bir akılı sözleşme geliştirmeye başlamadan gerekli yazılımların kurulması
+gerekmektedir.
 
-Rust and Cargo
+Rust ve Cargo
 ==============
 
-First, `install rustup`_, which will install both Rust_ and Cargo_ on your
-machine.
-Then use ``rustup`` to install the Wasm target, which is used for compilation:
+Öncelikle `install rustup`_, makinenize Rust ve Cargo' yu kuracaktır.
+Kurulumdan sonra ``rustup`` ile Wasm hedefini derlemek için kullanın;
 
 .. code-block:: console
 
@@ -21,36 +20,38 @@ Then use ``rustup`` to install the Wasm target, which is used for compilation:
 Cargo Concordium
 ================
 
-Cargo Concordium is the tool for developing smart contracts for the Concordium
-blockchain.
-It can be used for :ref:`compiling<compile-module>` and
-:ref:`testing<unit-test-contract>` smart contracts, and enables features such as
-:ref:`building contract schemas<build-schema>`.
+Cargo Concordium, Concordium blok zincirinde akıllı sözleşmeler geliştirmenizi
+sağlayan bir araçtır.
+Şunlar için kullanılabilir;
+:ref:`Derleme <compile-module>` ve :ref:`Test Etme <unit-test-contract>`
+gibi akıllı sözleşmeleri özelliklerin çalıştırır ve :ref:`sözleşme şeması oluşturma
+<build-schema>` özelliğini aktif edebilir.
 
 .. todo::
 
    Add links for testing and schemas.
 
-Cargo Concordium is distributed as part of the :ref:`Concordium software<downloads>` package.
-The tool should be placed in your PATH.
+Cargo Concordium, :ref:`Concordium Yazılımı <downloads>` paketiyle dağıtılır.
+Bu araş PATH 'inize tanımlanmalıdır.
 
-For a description of how to use the Cargo Concordium run:
+Cargo Concordium çalıştırılması ile ilgili yardım;
 
 .. code-block:: console
 
    $cargo concordium --help
 
-Concordium software
+Concordium Yazılımı
 ===================
 
-The tool to deploy and interact with smart contracts is
-:ref:`concordium-client<concordium_client>`. It is distributed as part of the
-:ref:`Concordium software<downloads>` package.
+:ref:`concordium-client<concordium_client>` akıllı sözleşmeleri devreye alma
+ve bunlarla etkileşim kurmaya yarayan bir araçtır. :ref:`Concordium Yazılımı
+<downloads>` nın bir parçası olarak dağıtılır.
 
-.. note::
+.. Not::
 
-   To deploy smart contract modules and interact with the chain, make sure
-   that you are :ref:`running a node<run-a-node>`.
+   Bir akıllı sözleşme dağıtmak yada zincirle etkileşimde bulunmak için Bir
+   Node Server çalıştığınızdan emin olun. Daha fazla bilgi için
+   :ref:`Node Server Çalıştırma <run-a-node>`.
 
 .. _Rust: https://www.rust-lang.org/
 .. _Cargo: https://doc.rust-lang.org/cargo/
