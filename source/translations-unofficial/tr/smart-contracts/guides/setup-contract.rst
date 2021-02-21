@@ -7,9 +7,8 @@ Bir akıllı sözleşme projesi oluşturma
 =====================================
 
 Rust' ta bir akıllı sözleşme sıradan bir kütüphane olarak yazılır. Daha sonra
-Rust hedfine Wasm kullanılarak derlenir
-``wasm32-unknown-unknown`` ve sadece Rust kütüphanesi olduğundan Cargo_
-bağımlılıklarının yönetimi için kullanılır.
+Rust hedefine Wasm ``wasm32-unknown-unknown`` kullanılarak derlenir
+ve Rust kütüphanesi bağımlılıklarının yönetmek için sadece Cargo_ kullanılır.
 
 Yeni bir akıllı sözleşme oluşturmak için öncelikle bir dizin oluşturun ve dizin
 içinde terminal ekranında şu konutu çalıştırın;
@@ -18,7 +17,7 @@ içinde terminal ekranında şu konutu çalıştırın;
 
    $cargo init --lib
 
-Bu işlem birkaç dosya ve dizin oluşturarak Rust Kütüğhanesi' nı kuracaktır.
+Bu işlem birkaç dosya ve dizin oluşturarak Rust Kütüphanesi' nı kuracaktır.
 This will set up a default Rust library project by creating a few files and
 directories.
 Bu dizin ``Cargo.toml`` dosyası ``src`` dizini ve bazı gizli dosyalar içerir.
@@ -46,7 +45,7 @@ gelmelidir.)
 
 Kütüphane ile ilhili bilgilere docs.rs_ 'den ulaşabilisiniz.
 
-.. Not::
+.. note::
 
    Standart kütüphane yerine özelleştirilmiş bir tane kullanmak isterseniz,
    ``concordium-std`` reposunu klonlayıp,``Cargo.toml``: içerisine bağımlılıklar
