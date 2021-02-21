@@ -4,107 +4,109 @@
 
 .. _compile-module:
 
-====================================
-Compile a Rust smart contract module
-====================================
+=====================================
+Rust akıllı sözleşme modülünü derleme
+=====================================
 
-This guide will show you how to compile smart contract module written in Rust to
-a Wasm module.
+Bu kılavuz size Rust'ta yazılmış akıllı sözleşme modülünü bir Wasm modülüne
+nasıl derleyeceğinizi açıklamamaktadır.
 
-Preparation
+Hazırlıklar
 ===========
 
-Make sure to have Rust and Cargo installed and the ``wasm32-unknown-unknown``
-target, together with ``cargo-concordium`` and the Rust source code for a smart
-contract module, you wish to compile.
+Rust ve Cargo' nun kurulu olduğundan ve ``wasm32-unknown-unknown``hedefin
+``cargo-concordium`` ile Rust kaynak kodunu derlemeye hazır olduğundan emin olun.
 
 .. seealso::
 
-   For instructions on how to install the developer tools see
+   Geliştirici araçlarının kurulum ile ilgili gerekli bilgiye burada
+   ulaşabilirsiniz.
    :ref:`setup-tools`.
 
-Compiling to Wasm
-=================
+Wasm' a Derleme
+===============
 
-To help building smart contract modules and to take advantage of features
-such as :ref:`contract schemas <contract-schema>`, we recommend using the
-``cargo-concordium`` tool for building Rust_ smart contracts.
+Akıllı sözleşme modülleri oluşturmaya yardımcı olmak ve aşağıdaki gibi
+özelliklerden yararlanmak için :ref:`Sözleşme Şemaları <contract-schema>` 'na
+göz atabilirsiniz. Biz Rust Akıllı Sözleşme oluşturmak için ``cargo-concordium``
+aracını kullanmanızı öneririz.
 
-In order to build a smart contract, run:
+Akıllı sözleşme oluşturmak için şunu çalıştırın;
 
 .. code-block:: console
 
    $cargo concordium build
 
-This uses Cargo_ for building, but runs further optimizations on the result.
+Bu kumut, derleme için Cargo_ 'yu kullanır ve sonuş üstünde daha fazla
+optimizasyon sağlar.
 
 .. seealso::
 
-   For building the schema for a smart contract module, some :ref:`further
-   preparation is required <build-schema>`.
+  Ayrıca derleme için gerekli adımlara <build-schema>` 'dan ulaşabilirsiniz.'
 
 .. note::
 
-   It is also possible to compile using Cargo_ directly by running:
+   Aşağıdaki komut ile Cargo_ 'yu kullanarak tek komutla derlemek mümkündür.
 
    .. code-block:: console
 
       $cargo build --target=wasm32-unknown-unknown [--release]
 
-   Note that even with ``--release`` set, the produced Wasm module includes
-   debug information.
+   ``--release`` tanımlandığında Wasm modulünün hata ayıklama bilgisi
+   içerdiğini unutmayın.
 
-Removing host information from build
-====================================
+Ana bilgisayar bilgilerini Derleme içerisinden kaldırma
+=======================================================
 
-The compiled Wasm module can contain information from the host machine building
-the binary; information such as the absolute path of the ``.cargo`` directory.
+Derlemden sonra Wasm modülünü oluşturan bilgiler ``.cargo`` dizini altında
+bulunur.
 
-For most people this is not sensitive information, but it is important to be
-aware of it.
+Çoğu insan için bu hassas bir bilgi değildir, ancak bunun farkında olmak
+önemlidir.
 
-On Linux the paths can be inspected by running:
+Linux'ta yollar şu şekilde incelenebilir:
 
 .. code-block:: console
 
    strings contract.wasm | grep /home/
 
-.. rubric:: The solution
+.. rubric:: Bilgilerin Kaldırılması
 
-The ideal solution would be to remove this path entirely, but that is
-unfortunately not a trivial task in general.
+İdeal çözüm, bu yolu tamamen kaldırmak olacaktır, ancak bu maalesef genel
+olarak önemsiz bir görev değildir.
 
-It is possible to work around the issue by using the ``--remap-path-prefix``
-flag when compiling the contract.
-On Unix-like systems the flag can be passed directly to the ``cargo concordium``
-invocation using the ``RUSTFLAGS`` environment variable:
+Sözleşmenin derlenmesi esnasında ``--remap-path-prefix`` ile dizin bilgilerini
+kaldırmak mümkündür.
+
+Unix tabanlı sistemlerde ``cargo concordium``kullanımı sırasında
+``RUSTFLAGS`` tanımıyla kaldırılabilir.
 
 .. code-block:: console
 
    $RUSTFLAGS="--remap-path-prefix=$HOME=" cargo concordium build
 
-Which will replace the users home path with the empty string. Other paths could
-be mapped in a similar way. In general using ``--remap-path-prefix=from=to``
-will map ``from`` to ``to`` at the beginning of any embedded path.
+Bu işlem kullanıcıların ana yolunu boş dizeyle değiştirir. Diğer yollar da
+benzer bir şekilde değiştirilebilir.. Genel kullanım ``--remap-path-prefix=from=to``
+ile tanımlama yapılabilir.
 
-The flag can also be set permanently in the ``.cargo/config`` file in your
-crate, under the build section:
+Bu tanımla derleme esnansında kalıcı kullanıcı yollu``.cargo/config``
+altına tanımlanabilir.
 
 .. code-block:: toml
 
    [build]
    rustflags = ["--remap-path-prefix=/home/<user>="]
 
-where `<user>` should be replaced with the user building the wasm module.
+burada `<user>` Wasp modülünü derleyen kullanıcı adı ile değiştirilmelidir.
 
-Caveats
--------
+Uyarılar
+--------
 
-The above will likely not fix the issue if the ``rust-src`` component is
-installed for the Rust toolchain. This component is needed by some Rust tools
-such as the rust-analyzer_.
+Rust araçzinciri için `rust-src`` yüklenmişse bu yukarıdakile muhtemelen
+bilgileri kaldırmayacaktır. Bunu için rust-analyzer_ tarzı araçlara ihtiyacınız
+olabilir.
 
-.. seealso::
+.. Ayrıca Bakınız::
 
    An issue reporting the problem with ``--remap-path-prefix`` and ``rust-src``
    https://github.com/rust-lang/rust/issues/73167
