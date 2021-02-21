@@ -1,7 +1,7 @@
 .. _setup-tools:
 
 ==========================================
-Geliştirme için gerekli araşların kurulumu
+Geliştirme için gerekli araçların kurulumu
 ==========================================
 
 Bir akılı sözleşme geliştirmeye başlamadan gerekli yazılımların kurulması
@@ -10,8 +10,8 @@ gerekmektedir.
 Rust ve Cargo
 ==============
 
-Öncelikle `install rustup`_, makinenize Rust ve Cargo' yu kuracaktır.
-Kurulumdan sonra ``rustup`` ile Wasm hedefini derlemek için kullanın;
+Öncelikle `install rustup`_ ile makinenize Rust ve Cargo' yu kurmalısınız.
+Kurulumdan sonra ``rustup`` komutunu Wasm hedefini derlemek için kullanın;
 
 .. code-block:: console
 
@@ -24,7 +24,7 @@ Cargo Concordium, Concordium blok zincirinde akıllı sözleşmeler geliştirmen
 sağlayan bir araçtır.
 Şunlar için kullanılabilir;
 :ref:`Derleme <compile-module>` ve :ref:`Test Etme <unit-test-contract>`
-gibi akıllı sözleşmeleri özelliklerin çalıştırır ve :ref:`sözleşme şeması oluşturma
+gibi akıllı sözleşmeleri özelliklerini çalıştırır ve :ref:`sözleşme şeması oluşturma
 <build-schema>` özelliğini aktif edebilir.
 
 .. todo::
@@ -32,7 +32,7 @@ gibi akıllı sözleşmeleri özelliklerin çalıştırır ve :ref:`sözleşme �
    Add links for testing and schemas.
 
 Cargo Concordium, :ref:`Concordium Yazılımı <downloads>` paketiyle dağıtılır.
-Bu araş PATH 'inize tanımlanmalıdır.
+Bu araç PATH 'inize tanımlanmalıdır.
 
 Cargo Concordium çalıştırılması ile ilgili yardım;
 
